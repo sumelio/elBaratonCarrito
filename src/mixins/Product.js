@@ -4,7 +4,8 @@ const productMixin = {
     removeProduct (product) { this.$store.commit('removeProduct', {product}) },
     showAllInfo () { this.isShowAllInfo = true },
     hideAllInfo () { this.isShowAllInfo = false },
-    setProductFind ({products}) { this.$store.commit('setProductFind', {products}) }
+    setProductFind ({products}) { this.$store.commit('setProductFind', {products}) },
+    setLevel ({level}) { this.$store.commit('setLevel', {level}) }
   },
 
   filters: {

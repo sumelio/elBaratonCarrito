@@ -22,5 +22,29 @@
     "name": "Mantequilla sin sal",
     "need_image": true,
     "quantity": 126
-    } ]
+    },
+    {
+        "available": true, 
+        "image": "23252.png",
+        "balance_price": 4700, 
+        "id": "6660307_23254",
+        "price": 4700,
+        "product_id": 23258,
+        "description": "Mantequilla sin Sal, 125 Gramo(s).  - PLU: 23252",
+        "name": "Mantequilla sin sal",
+        "need_image": true,
+        "quantity": 126
+        },
+        {
+            "available": true, 
+            "image": "23252.png",
+            "balance_price": 4700, 
+            "id": "6660307_23254",
+            "price": 4700,
+            "product_id": 23258,
+            "description": "Mantequilla sin Sal, 125 Gramo(s).  - PLU: 23252",
+            "name": "Mantequilla sin sal",
+            "need_image": true,
+            "quantity": 126
+            } ]
 }

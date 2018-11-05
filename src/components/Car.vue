@@ -39,12 +39,10 @@
 <style lang="scss" scoped >
 .boxCar {
   display: run-in;
-  top: 10;
-  right: 1;
+  top: 2;
+  right: 0;
   position: fixed;
   z-index: 10010;
-  //background: rgba(255, 113, 117, 0.55);
-  //background-image: url('../assets/car_small.png');
   box-shadow: 0 0 30px rgba(0, 0, 0, 0.2);
   border-radius: 15px;
   padding: 10px;
@@ -155,9 +153,7 @@
 
            table.scroll {
             display: inline;
-             width: 100%;
-             height: 80%;
-             right: 100px;
+            right: 100px;
 
              /* 140px * 5 column + 16px scrollbar width */
              border-spacing: 0;
@@ -207,8 +203,6 @@
                        position: absolute;
                        top: 100%;
                        left: 50%;
-
-                       //margin-left: -5px;
                        border-width: 5px;
                        border-style: solid;
          @media only screen and (max-width: 600px){
@@ -304,8 +298,8 @@ i.deleteProduct {
 .counter{
   display: -webkit-flex;
   display: flex;
-  -webkit-flex-direction: column;
-  flex-direction: column;
+  -webkit-flex-direction: row;
+  flex-direction: row;
   justify-content: center;
   min-width: 5px;
 }

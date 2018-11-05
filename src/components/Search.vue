@@ -1,24 +1,19 @@
 <template lang="pug">
 #main
   .sectionSearch
-       rp-car.shoppingCar()
-        p(slot="body") No se encontrarón resultados
+       rp-car()
        .centerTitle Carrito
-       .sectionFilter
-         rp-filter.filter()          
-         transition(name="move")
-         rp-loader(v-show="isLoading")
-       .categories
-        span(v-for="c in categories") 
-          RpLevel(:id="c.id" :level="c") 
-          // span {{ c.name }}
-          // RpLevel.level(v-for="level in c.sublevels" :id="level.id" :level="level") 
-        transition(name="move")
-         rp-loader(v-show="isLoading")
-       .productcontainer
-        .productClass(v-for="p in orderedProducts")
-          transition-group(name="card")
-          rp-product.card( v-blur="p.popularity", :key="p.id" :product="p")
+       .mainSection
+        .menuCategory 
+         rp-menu()
+        .currentProducts
+          .center {{dataStore.level.name}} 
+          .sectionFilter
+            rp-filter.filter()           
+          .productcontainer
+            .productClass(v-for="p in orderedProducts")
+              transition-group(name="card")
+              rp-product.card( v-blur="p.popularity", :key="p.id" :product="p")
 </template>
 
 <script>
@@ -26,9 +21,8 @@
   import categoryService from '@/services/categories'
   import RpProduct from '@/components/Product.vue'
   import RpFilter from '@/components/Filter.vue'
-  import RpLevel from '@/components/Level.vue'
+  import RpMenu from '@/components/Menu.vue'
   import RpNotification from '@/components/shared/Notification.vue'
-  import RpLoader from '@/components/shared/Loader.vue'
   import RpCar from '@/components/Car.vue'
   import RpProductDetail from '@/components/ProductDetail.vue'
   import Lodash from 'lodash'
@@ -37,7 +31,7 @@
   export default {
     name: 'app',
 
-    components: { 'rp-prod-detail': RpProductDetail, RpCar, RpLevel, RpProduct, RpFilter, RpLoader, RpNotification },
+    components: { 'rp-prod-detail': RpProductDetail, RpMenu, RpCar, RpProduct, RpFilter, RpNotification },
 
     data () {
       return {
@@ -85,28 +79,27 @@
 </script>
 
 <style lang="scss">
- .categories {
-    display: flex;
-    flex-flow: row wrap;
-    //flex-wrap: wrap;
-    //justify-content: space-evenly;
+.mainSection {
+  display: inline-flex;
+  flex-flow: row;
+  //flex-direction: column;
+}
+div.center {
+   margin: 10px;
+   width: 100%;
+   text-align: center;
+   font-weight: bold;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+   border-radius: 16px;
  }
- .category {
-    border: 1px solid black;
-    margin: 10px;
-    background-color: white;
- }
-
- .level {
-    border: 1px solid black;
-    margin: 10px;  
-    background-color: green;
-    // flex-direction: column;
-    display: flex;
-    flex-flow: row wrap;
- }
-
-   .productcontainer {
+.menuCategory {
+  min-width: 200px;
+  max-width: 200px;
+}
+.currentProducts {
+ width: 100%;
+}
+.productcontainer {
     position: relative;
     padding: 0px 0 0px 0;
     width: 100%;
@@ -123,4 +116,5 @@
     box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
     border-radius: 16px;
   }
+
 </style>

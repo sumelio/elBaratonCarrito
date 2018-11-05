@@ -3,8 +3,6 @@
       .containerHeader
            .nav-center
       #myTopnav(:class="{'topnav':istopnav, 'responsive':responsive }")
-         div
-          strong El baraton
          router-link.buttonNav.button-nav(to="about") Cambiar la URL de la Api REST Rappi
          router-link.buttonNav.button-nav(to="/") Carrito
          a(:class="{'icon':true}", @click="myFunction") &#9776

@@ -1,20 +1,18 @@
 <template lang="pug">
-span
-  span.level(v-if="level.sublevels && level.sublevels.length > 0" )  
-    span(v-if=" level.sublevels.filter( e => !e.sublevels || e.sublevels.length === 0).length > 0 ") 
-     span {{ level.name }} search
-    span.finalLevel(v-if=" level.sublevels.filter( e => !e.sublevels || e.sublevels.length === 0).length > 0 ") 
-     level(v-for="child in level.sublevels" :id="child.id" :level="child")
-    span(v-if=" ! level.sublevels.filter( e => !e.sublevels || e.sublevels.length === 0).length > 0 ") 
-     span  {{ level.name }}
-     level(v-for="child in level.sublevels" :id="child.id" :level="child") 
-  span(v-if="!level.sublevels || !level.sublevels.length > 0" )  
-    .product [ product {{ level.id }} {{ level.name }} ]
+ li 
+  a(v-show="level.sublevels && level.sublevels.length > 0"  
+     @click="hideChild()") {{level.name}}
+  a(:class="{'is-active': dataStore.level === level}" 
+     v-show="!level.sublevels || !level.sublevels.length > 0" 
+     @click="setLevel({level})") :: {{level.name}}
+  ul(v-for="child in level.sublevels" v-show="childShow")
+   level(:id="child.id" :level="child")
 </template>
 
 <script>
   import productMixin from '@/mixins/Product'
   import level from '@/components/Level.vue'
+  import { mapState } from 'vuex'
 
   export default {
     name: 'level',
@@ -25,6 +23,28 @@ span
 
     props: {
       level: Object
+    },
+
+    data () {
+      return {
+        childShow: true
+      }
+    },
+    created () {
+      this.showChild = true
+    },
+
+    methods: {
+      showChild () {
+        this.childShow = true
+      },
+      hideChild () {
+        this.childShow = !this.childShow
+      }
+    },
+
+    computed: {
+      ...mapState(['dataStore'])
     }
   }
 </script>
@@ -52,4 +72,7 @@ span
     flex-flow: row wrap;
  }
 
+a {
+    padding: 0;
+}
 </style>

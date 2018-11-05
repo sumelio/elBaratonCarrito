@@ -7,7 +7,8 @@ const store = new Vuex.Store({
   state: {
     dataStore: {
       shippingCar: { products: [], quantity: 0, totalPrice: 0 },
-      productsFind: []
+      productsFind: [],
+      level: Object
     }
   },
 
@@ -36,6 +37,10 @@ const store = new Vuex.Store({
       products.forEach(element => {
         state.dataStore.productsFind.push(element)
       })
+    },
+
+    setLevel (state, {level}) {
+      state.dataStore.level = level
     }
   }
 })

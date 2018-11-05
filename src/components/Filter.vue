@@ -1,17 +1,17 @@
 <template lang="pug">
 #filter
-  .contentfilter
-    .searchText
-      input.input.search-input(
-        type="text", placeholder="Busca productos en el baratón"
-        v-model="searchQuery" )
-      button.button.search-button.iconf-ico-buscar(
-          @click="search" )
   .item.center-item
     button.button(v-show="!showFilter",  @click="showFilterOn") Ocultar filtros
     button.button-green(v-show="showFilter",  @click="hideFilter") Mostrar filtros
   transition(name="slide-fade")
     .contentfilter.green(:class="{'hide':false}", v-show="!showFilter")
+      .contentfilter
+        .searchText
+          input.input.search-input(
+            type="text", placeholder="Busca productos en el baratón"
+            v-model="searchQuery" )
+          button.button.search-button.iconf-ico-buscar(
+              @click="search" )
       .filters
         .contentfilter
           .item Disponible:
@@ -42,16 +42,22 @@
               option( :value="1" ) Nombre
               option( :value="2" ) Precio descendente
               option( :value="3" ) Precio ascendente
+                p(slot="body") No se encontrarón resultados          
+      transition(name="move")
+      rp-loader(v-show="isLoading")          
      
 </template>
 
 <script>
   import productService from '@/services/Products'
   import Lodash from 'lodash'
+  import RpLoader from '@/components/shared/Loader.vue'
   import { mapState } from 'vuex'
 
   export default {
     name: 'filters',
+
+    components: { RpLoader },
 
     data () {
       return {
