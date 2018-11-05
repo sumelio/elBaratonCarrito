@@ -32,7 +32,6 @@ const store = new Vuex.Store({
     },
 
     setProductFind (state, {products}) {
-      console.log(products)
       state.dataStore.productsFind = []
       products.forEach(element => {
         state.dataStore.productsFind.push(element)
