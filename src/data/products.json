@@ -1,0 +1,26 @@
+{ "products": [
+  {
+  "available": true, 
+  "image": "23252.png",
+  "balance_price": 3700, 
+  "id": "6660307_23252",
+  "price": 3700,
+  "product_id": 23252,
+  "description": "Mantequilla Con Sal, 125 Gramo(s).  - PLU: 23252",
+  "name": "Mantequilla con Sal Alpina",
+  "need_image": true,
+  "quantity": 125
+  },
+  {
+    "available": true, 
+    "image": "23252.png",
+    "balance_price": 4700, 
+    "id": "6660307_23254",
+    "price": 4700,
+    "product_id": 23258,
+    "description": "Mantequilla sin Sal, 125 Gramo(s).  - PLU: 23252",
+    "name": "Mantequilla sin sal",
+    "need_image": true,
+    "quantity": 126
+    } ]
+}
