@@ -49,7 +49,6 @@ export default {
   methods: {
     changeUrl () {
       this.$bus.$emit('set-url-api', this.apiUrl)
-      console.log(' Change url .......')
     }
   }
 }

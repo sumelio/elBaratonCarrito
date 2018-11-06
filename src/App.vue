@@ -24,11 +24,8 @@ export default {
   },
 
   created () {
-    console.log('Create..................................................')
     this.$bus.$on('set-url-api', (url) => {
-      console.log('App ... ' + url)
       this.apiUrl = url
-      // this.apiUrl = url
     })
   }
 }

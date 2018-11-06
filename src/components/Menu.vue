@@ -1,14 +1,15 @@
 <template lang="pug">
 aside.menu
  p.menu-label Categorias
- ul.menu-list(v-for="c in categories") 
-   RpLevel(:id="c.id" :level="c")
-    //- .categories
-    //-  ul.menu(v-for="c in categories") 
-    //-    
-    //- transition(name="move")
-    //- rp-loader(v-show="isLoading")
-   
+  .menuList
+    ul.menu-list(v-for="c in categories") 
+      RpLevel(:id="c.id" :level="c")
+        //- .categories
+        //-  ul.menu(v-for="c in categories") 
+        //-    
+        //- transition(name="move")
+        //- rp-loader(v-show="isLoading")
+      
 </template>
 <script>
   import RpLevel from '@/components/Level.vue'
@@ -29,11 +30,10 @@ aside.menu
 </script>
 
 <style lang="scss" scoped >
-.menu2 {
-  display: run-in;
-  top: 10;
-  right: 100; 
-  z-index: 10009;
+.menuList { 
+   width: 190px;
+   height: 360px;
+   overflow: scroll;
 }
 
 .li {

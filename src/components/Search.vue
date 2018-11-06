@@ -2,22 +2,21 @@
 #main
   .sectionSearch
        rp-car()
-       .centerTitle Carrito
+       .centerTitle
        .mainSection
         .menuCategory 
-         rp-menu()
-        .currentProducts
-          .center {{dataStore.level.name}} 
-          .sectionFilter
-            rp-filter.filter()           
-          .productcontainer
-            .productClass(v-for="p in orderedProducts")
-              transition-group(name="card")
-              rp-product.card( v-blur="p.popularity", :key="p.id" :product="p")
+         rp-menu.menuBox()
+        .subLevelTitle {{  dataStore.level.name? dataStore.level.name : 'Todos los productos' }} {{dataStore.level.id? ', id:'+dataStore.level.id:''}} 
+          .currentProducts
+            .sectionFilter
+              rp-filter.filter()           
+            .productcontainer
+              .productClass(v-for="p in dataStore.productsFind")
+                transition-group(name="card")
+                rp-product.card( :key="p.id" :product="p")
 </template>
 
 <script>
-  import productService from '@/services/Products'
   import categoryService from '@/services/categories'
   import RpProduct from '@/components/Product.vue'
   import RpFilter from '@/components/Filter.vue'
@@ -25,7 +24,6 @@
   import RpNotification from '@/components/shared/Notification.vue'
   import RpCar from '@/components/Car.vue'
   import RpProductDetail from '@/components/ProductDetail.vue'
-  import Lodash from 'lodash'
   import { mapState } from 'vuex'
 
   export default {
@@ -47,8 +45,6 @@
     created () {
       this.isLoading = true
       this.categories = categoryService.search(this.searchQuery, this.apiUrl)
-      this.products = productService.search(this.searchQuery, this.apiUrl)
-      this.$store.commit('setProductFind', {products: this.products})
       this.isLoading = false
     },
 
@@ -64,16 +60,7 @@
     },
 
     computed: {
-      ...mapState(['dataStore']),
-      orderedProducts: function () {
-        if (this.orderBy === 1) {
-          return Lodash.orderBy(this.dataStore.productsFind, 'name')
-        } else if (this.orderBy === 2) {
-          return Lodash.orderBy(this.dataStore.productsFind, ['price'], ['desc'])
-        } else {
-          return Lodash.orderBy(this.dataStore.productsFind, ['price'], ['asc'])
-        }
-      }
+      ...mapState(['dataStore'])
     }
   }
 </script>
@@ -84,13 +71,13 @@
   flex-flow: row;
   //flex-direction: column;
 }
-div.center {
-   margin: 10px;
+div.subLevelTitle { 
    width: 100%;
    text-align: center;
    font-weight: bold;
-    box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
-   border-radius: 16px;
+   font-size: 20px; 
+   box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+   border-radius: 10px;
  }
 .menuCategory {
   min-width: 200px;
@@ -116,5 +103,16 @@ div.center {
     box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
     border-radius: 16px;
   }
+.menuBox {
+  display: run-in;
+  top: 2;
+  right: 1;
+  position: fixed;
+  background: white;
+  z-index: 10008;
+}
 
+.filter {
+  font-size: 14px;
+}
 </style>

@@ -9,17 +9,16 @@
             td
              .tooltip
               img.imgCar(:src="product.image | absolutePath")
-              span.tooltiptext {{product.name}}, Precio: {{product.price | numberToCurrency}}
+              span.tooltiptext {{product.name}}, Precio: {{product.price}}
             td
               .counter
                 .add
-                  // i.addProduct.buttonSmall(@click="product.count_buy --" ) ➖
-                  i.addProduct.buttonSmall(@click="addProduct(product)" ) ➕
-                .count {{product.count_buy}}
+                  i.addProduct(@click="addProduct(product)" ) ➕
+                .counterProduct {{product.count_buy}}
                 .remove
-                  //i.removeProduct.buttonSmall(@click="product.count_buy ++") ➕
-                  i.removeProduct.buttonSmall(@click="removeProduct(product)") ➖
-            td.priceTable  {{product.count_buy * product.price | numberToCurrency}}
+                  i.removeProduct(@click="removeProduct(product)") ➖
+            td
+             span.priceTable {{product.count_buy * product.priceInt | numberToCurrency}}
       .totalBuyCar Cant: {{ dataStore.shippingCar.quantity }} Total:{{ dataStore.shippingCar.totalPrice | numberToCurrency }}
     .quantity {{ dataStore.shippingCar.totalPrice | numberToCurrency }}
 </template>
@@ -32,6 +31,12 @@
 
     computed: {
       ...mapState(['dataStore'])
+    },
+
+    filters: {
+      absolutePath (str) {
+        return 'https://static.iris.net.co/semana/upload/images/2016/10/29/502564_1.jpg'
+      }
     }
   }
 </script>
@@ -39,8 +44,8 @@
 <style lang="scss" scoped >
 .boxCar {
   display: run-in;
-  top: 2;
-  right: 0;
+  top: 0;
+  right: 1;
   position: fixed;
   z-index: 10010;
   box-shadow: 0 0 30px rgba(0, 0, 0, 0.2);
@@ -69,9 +74,9 @@
    position: absolute;
    width: 100px;
    color: red;
-   top: 140%;
+   top: 130%;
    font-weight: bold;
-   font-size: 12px;
+   font-size: 13px;
    background: rgba(255, 255, 255, 0.55);
  }
 
@@ -85,6 +90,10 @@
    }
  }
 
+.priceTable {
+  text-align: right;
+  font-size: 12px;
+}
  .tableCar {
    padding: 10px;
 
@@ -95,6 +104,7 @@
      /* 140px * 5 column + 16px scrollbar width */
      border-spacing: 0;
      padding: 100px;
+     font-size: 8px;
      //border: 2px solid black;
      tbody, thead tr {
        //display: block;
@@ -108,13 +118,8 @@
          width: auto;
          border-right: 1px solid black;
          word-wrap: break-word;
-         font-size: 16px;
+         font-size: 60px;
        }
-
-       td.priceTable {
-         text-align: right;
-       }
-
       }
      } // table.scroll
   } // tableCar
@@ -244,13 +249,11 @@ i.addProduct {
   z-index: 10002;
   width: 40px;
   height: 40px;
-  background: rgb(119, 221, 119);
-  color: #fff;
+  color: rgb(119, 221, 119);;
   border-radius: 20px;
   text-align: center;
   line-height: 40px;
-  font-size: 1.4rem;
-  box-shadow: 0 0 4px 2px rgba(80, 80, 80, 0.1);
+  font-size: 1.0rem;
   cursor: pointer;
   transition: all 0.3s;
   &:hover {
@@ -262,12 +265,11 @@ i.removeProduct {
   z-index: 10002;
   width: 50px;
   height: 50px;
-  background: #f24e4e;
-  color: #fff;
+  color: #f24e4e;
   border-radius: 25px;
   text-align: center;
   line-height: 38px;
-  font-size: 1.4rem;
+  font-size: 1.0rem;
   box-shadow: 0 0 4px 2px rgba(80, 80, 80, 0.1);
   cursor: pointer;
   transition: all 0.3s;
@@ -295,13 +297,24 @@ i.deleteProduct {
   }
 }
 
-.counter{
+.counterProduct{
   display: -webkit-flex;
   display: flex;
   -webkit-flex-direction: row;
   flex-direction: row;
   justify-content: center;
   min-width: 5px;
+  padding: 5px;
+}
+
+.counter {
+    display: -webkit-flex;
+  display: flex;
+  -webkit-flex-direction: row;
+  flex-direction: row;
+  justify-content: center;
+  min-width: 5px;
+  padding: 0px;
 }
 
 </style>

@@ -2,17 +2,13 @@
 .box
   i.addProduct.fa.fa-plus(@click="addProduct(product)")
   i.removeProduct.fa.fa-menus(:class="{'hide': product.count_buy < 1 }", @click="removeProduct(product)")
-  .countBuyProduct.fa(:class="{'hide': product.count_buy < 1 }" ) {{   product.count_buy  }}
+  .countBuyProduct.fa(:class="{'hide': product.count_buy < 1 }" ) {{ product.count_buy  }}
   img.item_data.img(:src="product.image | absolutePath")
   .headerBox
     .label
-      .price
-        button(@click="showAllInfo") Mostar todo
-        .windowsAllInfo(v-show="isShowAllInfo")
-          a(@click="hideAllInfo") X cerrar
-          rp-prod-detail.showAllInfoBox( :productDetail="product")
-      .price {{ product.price | numberToCurrency }}
-    .titleBox {{ product.name }}
+      .titleBox {{ product.name }}
+      .price {{ product.price}}
+    .titleBox {{ product.available ? 'D' : 'No d' }}isponible
   .image
     .showDetail
       a 🔍
@@ -20,13 +16,10 @@
       .detail
       .info
         ul
-          // img.imgBox(:src="product.image | absolutePath")
-          li {{ product.description | extractDescription }}
-          li {{ product.price | numberToCurrency }}
-          li {{ product.have_discount ? 'Con' : 'Sin' }} descuento
-          li {{ product.is_available ? 'D' : 'No d' }}isponible
-          li Cantidad {{ product.quantity }}
-          li Popularidad {{ product.popularity }}
+          li {{ product.id }}
+          li {{ product.price}}
+          li {{ product.available ? 'D' : 'No d' }}isponible
+          li Cantidad {{ product.quantity }} 
   .showAllInfo
 </template>
 
@@ -66,6 +59,13 @@ export default {
 
     hideAllInfo () {
       this.isShowAllInfo = false
+    }
+  },
+
+  filters: {
+    absolutePath (str) {
+      // return str + ' things'
+      return 'https://static.iris.net.co/semana/upload/images/2016/10/29/502564_1.jpg'
     }
   }
 
@@ -134,7 +134,7 @@ export default {
     height: 50px;
     color: #f24e4e;
     font-size: 20px;
-    right: -20px;
+    right: -4px;
     top: 190px;
     bottom: 60px;
   }
@@ -162,6 +162,7 @@ export default {
     max-height: 350px;
     width: auto;
     top: 100px;
+    right: 10px;
     padding: 10px;
     transition: all 1.5s ease-in-out;
   }

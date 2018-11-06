@@ -30,10 +30,10 @@
       .filters
         .contentfilter
           .item Precio entre $
-            input(type="number", v-model="minPrice", :min="1000000.00", :max="1000000.00")
+            input(type="number", v-model="minPrice", :min="100", :max="1000000.00")
             span.space-between
             span y $
-            input(type="number", v-model="maxPrice", :min="1000000.00", :max="1000000.00")
+            input(type="number", v-model="maxPrice", :min="100", :max="1000000.00")
         .contentfilter
           .item
             label(:for="orderBy") Ordernar por:
@@ -41,8 +41,7 @@
             select( v-model="orderBy" id="orderBy" )
               option( :value="1" ) Nombre
               option( :value="2" ) Precio descendente
-              option( :value="3" ) Precio ascendente
-                p(slot="body") No se encontrarón resultados          
+              option( :value="3" ) Precio ascendente    
       transition(name="move")
       rp-loader(v-show="isLoading")          
      
@@ -53,10 +52,11 @@
   import Lodash from 'lodash'
   import RpLoader from '@/components/shared/Loader.vue'
   import { mapState } from 'vuex'
+  import productMixin from '@/mixins/Product'
 
   export default {
     name: 'filters',
-
+    mixins: [ productMixin ],
     components: { RpLoader },
 
     data () {
@@ -70,7 +70,6 @@
         categoryIndex: 0,
         isavailable: true,
         quantity: 10000,
-        popularity: 1000000,
         minPrice: 1000,
         maxPrice: 100000.0,
         orderBy: 1,
@@ -83,11 +82,13 @@
     created () {
       this.isLoading = true
       let res = productService.search(this.searchQuery, this.apiUrl)
-      this.products = res
-      this.$store.commit('setProductFind', {products: res})
+      let productsReady = res.map(p => { p.priceInt = getInt(p.price); p.name = p.name.toLowerCase(); return p })
+      this.$store.commit('setProductFind', {products: productsReady})
+      this.$store.commit('setProduct', {products: productsReady})
       this.isLoading = false
       this.productsFilter = this.products
       this.isavailable = true
+      this.order()
     },
 
     watch: {
@@ -110,11 +111,6 @@
         this.search()
       },
 
-      popularity (newVal, oldVal) {
-        this.popularity = newVal
-        this.search()
-      },
-
       minPrice (newVal, oldVal) {
         this.minPrice = newVal
         this.search()
@@ -128,24 +124,26 @@
       searchQuery (newVal, oldVal) {
         this.searchQuery = newVal
         this.search()
+      },
+
+      orderBy (newVal, oldVal) {
+        this.order()
       }
 
     },
 
     methods: {
       search () {
-        this.isLoading = true// var sefl = this
-        this.products = this.productsFilter.filter(product => {
-          console.log(`${product.available} === ${this.isavailable}`)
-          return product.available === this.isavailable &&
-          product.quantity <= this.quantity &&
-          product.price >= this.minPrice &&
-          product.price <= this.maxPrice &&
-          (this.searchQuery === '' || product.name.toUpperCase().includes(this.searchQuery.toUpperCase()))
-        })
-        console.log(this.products)
+        this.isLoading = true
+        let productsFilter = this.dataStore.products.filter(item =>
+          item.available === this.isavailable &&
+          item.quantity <= this.quantity &&
+          item.priceInt >= this.minPrice &&
+          item.priceInt <= this.maxPrice &&
+          (this.searchQuery === '' || item.name.toUpperCase().includes(this.searchQuery.toUpperCase()))
+        )
         this.isLoading = false
-        this.$store.commit('setProductFind', {products: this.products})
+        this.$store.commit('setProductFind', {products: productsFilter})
       },
 
       showFilterOn () {
@@ -162,27 +160,41 @@
 
       hideAllInfo () {
         this.isShowAllInfo = false
+      },
+
+      order () {
+        let productsFilter = []
+        switch (this.orderBy) {
+          case 2:
+            productsFilter = Lodash.orderBy(this.dataStore.productsFind, ['priceInt'], ['desc'])
+            break
+          case 3:
+            productsFilter = Lodash.orderBy(this.dataStore.productsFind, ['priceInt'], ['asc'])
+            break
+          case 1:
+          default:
+            productsFilter = Lodash.orderBy(this.dataStore.productsFind, 'name')
+        }
+        this.$store.commit('setProductFind', {products: productsFilter})
       }
     },
 
     computed: {
-      ...mapState(['dataStore']),
-      orderedProducts: function () {
-        if (this.orderBy === 1) {
-          return Lodash.orderBy(this.dataStore.productsFind, 'name')
-        } else if (this.orderBy === 2) {
-          return Lodash.orderBy(this.dataStore.productsFind, ['price'], ['desc'])
-        } else {
-          return Lodash.orderBy(this.dataStore.productsFind, ['price'], ['asc'])
-        }
-      }
+      ...mapState(['dataStore'])
     }
   }
+function getInt (price) {
+    return parseInt(price.replace('$', '').replace(',', ''))
+}
 </script>
 
 <style lang="scss">
 
-
+input{
+  &::-webkit-inner-spin-button{
+    opacity:1; // magic!
+  } 
+}
   .contarnerMain {
    padding: 60px 0 0 0;
   }
