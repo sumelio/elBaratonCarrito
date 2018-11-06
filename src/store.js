@@ -1,7 +1,13 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
+import VuexPersist from 'vuex-persist'
 
 Vue.use(Vuex)
+var localStorage
+const vuexPersist = new VuexPersist({
+  key: 'my-app',
+  storage: localStorage
+})
 
 const store = new Vuex.Store({
   state: {
@@ -12,6 +18,7 @@ const store = new Vuex.Store({
       level: {Object}
     }
   },
+  plugins: [vuexPersist.plugin],
 
   mutations: {
     addProduct (state, {product}) {
