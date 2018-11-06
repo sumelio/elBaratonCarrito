@@ -27,7 +27,7 @@
 
     data () {
       return {
-        childShow: true
+        childShow: false
       }
     },
     created () {
