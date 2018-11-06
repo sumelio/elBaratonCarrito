@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 import VuexPersist from 'vuex-persist'
+import Lodash from 'lodash'
 
 Vue.use(Vuex)
 var localStorage
@@ -58,6 +59,7 @@ const store = new Vuex.Store({
       state.dataStore.level = level
       state.dataStore.productsFind = []
       let filter = state.dataStore.products.filter((element) => element.sublevel_id === state.dataStore.level.id)
+      filter = Lodash.orderBy(filter, 'name')
       filter.forEach(element => {
         state.dataStore.productsFind.push(element)
       })

@@ -81,10 +81,12 @@
 
     created () {
       this.isLoading = true
-      let res = productService.search(this.searchQuery, this.apiUrl)
-      let productsReady = res.map(p => { p.priceInt = getInt(p.price); p.name = p.name.toLowerCase(); return p })
-      this.$store.commit('setProductFind', {products: productsReady})
-      this.$store.commit('setProduct', {products: productsReady})
+      if (this.dataStore.productsFind.length === 0) {
+        let res = productService.search(this.searchQuery, this.apiUrl)
+        let productsReady = res.map(p => { p.priceInt = getInt(p.price); p.name = p.name.toLowerCase(); return p })
+        this.$store.commit('setProductFind', {products: productsReady})
+        this.$store.commit('setProduct', {products: productsReady})
+      }
       this.isLoading = false
       this.productsFilter = this.products
       this.isavailable = true
