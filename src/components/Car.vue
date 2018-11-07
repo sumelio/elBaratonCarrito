@@ -255,6 +255,7 @@
 
 @media only screen and (max-width: 600px){
   .boxCar {
+    top: 2px;
     padding: 3px;
     width: 30px;
     height: 30px;

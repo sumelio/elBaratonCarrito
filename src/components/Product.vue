@@ -299,10 +299,6 @@ export default {
   display: none;
 }
 
-.boxShowAll {
-  //border: red 2px solid;
-}
-
 .showAllInfoBox {
    background-color: rgb(158, 211, 191);
    width: 260px;

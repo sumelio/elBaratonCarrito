@@ -1,17 +1,17 @@
 <template lang="pug">
    section
       .containerHeader
-           .nav-center
-      #myTopnav(:class="{'topnav':istopnav, 'responsive':responsive }")
-         router-link.buttonNav.button-nav(to="/") El baraton
-         a(:class="{'icon':true}", @click="myFunction") &#9776
+      #myTopnav(:class="{'topnav':istopnav, 'responsive':responsive }") 
+         rp-menu-small.button-nav(:class="{'displayNone':!responsive}", to="/")
+         a(:class="{'icon':true}", @click="toggle") &#9776
 </template>
 
 <script>
 import RappiCar from '@/components/Car.vue'
+import RpMenuSmall from '@/components/MenuSmall.vue'
 
 export default {
-  components: { RappiCar },
+  components: { RappiCar, RpMenuSmall },
   data () {
     return {
       responsive: false,
@@ -20,12 +20,8 @@ export default {
   },
 
   methods: {
-    myFunction () {
-      if (this.responsive === false) {
-        this.responsive = true
-      } else {
-        this.responsive = false
-      }
+    toggle () {
+      this.responsive = !this.responsive
     }
   }
 }
@@ -55,8 +51,8 @@ export default {
     font-size: 14px;
     text-align: center;
     border: 0;
-    padding: 30px;
-    margin: 10px;
+    padding: 40px 0px 20px 0px;
+    margin: 20px 0px 10px 0px;
 }
 
 
@@ -64,15 +60,20 @@ export default {
 .topnav {
     background-color: rgb(158, 211, 191);
     overflow: hidden;
+    position: fixed;
+    width: 100%;
+    top: 0px;
+    left: 0px;
+    z-index: 1000;
 }
 
 /* Style the links inside the navigation bar */
-.topnav router-link a {
+.topnav a {
     float: right;
     display: block;
-    color: #f2f2f2;
+    color: black;
     text-align: center;
-    padding: 14px 16px;
+    padding: 0px 0px;
     text-decoration: none;
     font-size: 17px;
 }
@@ -108,6 +109,7 @@ router-link:hover {
 /* Hide the link that should open and close the topnav on small screens */
 .topnav .icon {
     display: none;
+    font-size: 20px;
 }
 
 /* When the screen is less than 600 pixels wide, hide all links, except for the first one ("Home"). Show the link that contains should open and close the topnav (.icon) */
@@ -133,20 +135,20 @@ router-link:hover {
     right: 0;
     top: 0;
   }
-  .topnav.responsive router-link {
-    float: none;
-    display: block;
-    text-align: left;
-    background-color: rgb(0, 0, 0);
-  }
-
   .topnav.responsive a {
-    float: none;
+    float: right;
     display: block;
-    text-align: left;
-    padding: 10px;
+    color: #f2f2f2;
+    background-color: #FF7175;
+    text-align: center;
+    padding: 0px 0px;
+    text-decoration: none;
+    font-size: 17px;
   }
-
-
 }
+
+.displayNone {
+  display: none;
+}
+
 </style>

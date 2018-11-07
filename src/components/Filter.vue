@@ -14,32 +14,25 @@
     .contentfilter.green(:class="{'hide':false}", v-show="!showFilter")
       .filters
         .contentfilter
-          .item 
           .item
             fieldset.fieldsetFilter
               legend Disponible
-              span.space-between
               label.radio(for="availableFalse") Todos
-               span.space-between 
                input(type="radio", v-model="isavailable", :value="1", id="is_available", name="is_available", @click="search")
               span.space-between
-              span.space-between
               label.radio(for="availableFalse") Si
-                span.space-between
                 input(type="radio", v-model="isavailable", :value="2", id="is_available", name="is_available", @click="search")
               span.space-between
-              span.space-between
-              label.radio(for="availableTrue") No
-               span.space-between
+              label.radio(for="availableTrue") No 
                input.radio(type="radio", v-model="isavailable", :value="3", id="is_available", name="is_available", @click="search"  )
         .contentfilter
           fieldset.fieldsetFilter
               legend Cantidad
               .item 
                 span.space-between
-                span Menos de {{quantity}} 
+                label.radio(for="rangeQuantity") Menos de {{quantity}} 
                 span.space-between
-                input.slider.is-large(type="range", v-model="quantity", :min="0", :max="1000")
+                input.slider.is-large(type="range", id="rangeQuantity", v-model="quantity", :min="0", :max="1000")
                 span.space-between
       .filters
         .contentfilter
@@ -244,11 +237,6 @@ input{
     -webkit-flex-direction: column;
     flex-direction: column;
   }
-
-  .sectionFilter {
-     // border: purple 2px solid;
-  }
-
   .centerTitle {
     position: relative;
     text-align: center;
@@ -494,8 +482,15 @@ input{
    }
 
    .fieldsetFilter {
-     width: 320px;
+     width: 340px;
+       @media only screen and (max-width: 600px){
+        width: 100%;
+      }  
    }
+
+    input[number] {
+     width: 80px;
+    }
 
 
 </style>

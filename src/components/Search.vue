@@ -79,9 +79,13 @@ div.subLevelTitle {
    box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
    border-radius: 10px;
  }
+ 
 .menuCategory {
   min-width: 200px;
   max-width: 200px;
+  @media only screen and (max-width: 600px){
+    display: none;
+ }  
 }
 .currentProducts {
  width: 100%;
