@@ -83,6 +83,7 @@ const store = new Vuex.Store({
       state.dataStore.shippingCar.quantity = 0
       state.dataStore.shippingCar.totalPrice = 0
       state.dataStore.productsFind = []
+      state.dataStore.level = {}
     }
   }
 })

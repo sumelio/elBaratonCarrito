@@ -14,34 +14,58 @@
     .contentfilter.green(:class="{'hide':false}", v-show="!showFilter")
       .filters
         .contentfilter
-          .item Disponible:
+          .item 
           .item
-            label(for="availableFalse") Si
-            span.space-between
-            input(type="radio", v-model="isavailable", :value="true", id="is_available", name="is_available", @click="search")
-            span.space-between
-            label(for="availableTrue") No
-            span.space-between
-            input(type="radio", v-model="isavailable", id="is_available", name="is_available", @click="search"  )
+            fieldset.fieldsetFilter
+              legend Disponible
+              span.space-between
+              label.radio(for="availableFalse") Todos
+               span.space-between 
+               input(type="radio", v-model="isavailable", :value="1", id="is_available", name="is_available", @click="search")
+              span.space-between
+              span.space-between
+              label.radio(for="availableFalse") Si
+                span.space-between
+                input(type="radio", v-model="isavailable", :value="2", id="is_available", name="is_available", @click="search")
+              span.space-between
+              span.space-between
+              label.radio(for="availableTrue") No
+               span.space-between
+               input.radio(type="radio", v-model="isavailable", :value="3", id="is_available", name="is_available", @click="search"  )
         .contentfilter
-          .item Cantidad <= {{quantity}}
-          .item
-            input(type="range", v-model="quantity", :min="0", :max="1000")
+          fieldset.fieldsetFilter
+              legend Cantidad
+              .item 
+                span.space-between
+                span Menos de {{quantity}} 
+                span.space-between
+                input.slider.is-large(type="range", v-model="quantity", :min="0", :max="1000")
+                span.space-between
       .filters
         .contentfilter
-          .item Precio entre $
-            input(type="number", v-model="minPrice", :min="100", :max="1000000.00")
-            span.space-between
-            span y $
-            input(type="number", v-model="maxPrice", :min="100", :max="1000000.00")
+          .item
+           fieldset.fieldsetFilter 
+            legend Precio 
+            .item Entre $
+              input(type="number", v-model="minPrice", :min="100", :max="100000")
+              span.space-between
+              span y
+              span.space-between $
+              input(type="number", v-model="maxPrice", :min="100", :max="100000")
+              span.space-between
         .contentfilter
-          .item
-            label(:for="orderBy") Ordernar por:
-          .item
-            select( v-model="orderBy" id="orderBy" )
-              option( :value="1" ) Nombre
-              option( :value="2" ) Precio descendente
-              option( :value="3" ) Precio ascendente    
+          fieldset.fieldsetFilter 
+              legend Ordenar 
+              .item
+                label(:for="orderBy")  por
+                span.space-between
+                select.select( v-model="orderBy" id="orderBy" )
+                  option( :value="1" ) Nombre
+                  option( :value="2" ) Precio descendente
+                  option( :value="3" ) Precio ascendente    
+                  option( :value="4" ) Cantidad
+                  option( :value="5" ) Disponibilidad
+              span.space-between    
       transition(name="move")
       rp-loader(v-show="isLoading")          
      
@@ -87,7 +111,7 @@
       }
       this.isLoading = false
       this.productsFilter = this.products
-      this.isavailable = true
+      this.isavailable = 1
       this.order()
     },
 
@@ -135,13 +159,18 @@
     methods: {
       search () {
         this.isLoading = true
-        let productsFilter = this.dataStore.products.filter(item =>
-          item.sublevel_id === this.dataStore.level.id &&
-          item.available === this.isavailable &&
+
+        let productsFilter = this.dataStore.products.filter(item => {
+          console.log(`${item.available} === ${this.isavailable}`)
+          let result = (item.sublevel_id === this.dataStore.level.id &&
+          (this.isavailable === 1 || item.available === (this.isavailable === 2)) &&
           item.quantity <= this.quantity &&
           item.priceInt >= this.minPrice &&
           item.priceInt <= this.maxPrice &&
-          (this.searchQuery === '' || item.name.toUpperCase().includes(this.searchQuery.toUpperCase()))
+          (this.searchQuery === '' || item.name.toUpperCase().includes(this.searchQuery.toUpperCase())))
+
+          return result
+        }
         )
         this.isLoading = false
         this.$store.commit('setProductFind', {products: productsFilter})
@@ -172,6 +201,12 @@
             break
           case 3:
             productsFilter = Lodash.orderBy(this.dataStore.productsFind, ['priceInt'], ['asc'])
+            break
+          case 4:
+            productsFilter = Lodash.orderBy(this.dataStore.productsFind, ['quantity'], ['asc'])
+            break
+          case 5:
+            productsFilter = Lodash.orderBy(this.dataStore.productsFind, ['available'], ['desc'])
             break
           case 1:
           default:
@@ -240,7 +275,7 @@ input{
   } // fiters
 
   .contentfilter {
-    padding: 20px;
+    padding: 5px;
     border-bottom: rgb(158, 211, 191) 1px solid;
   }
   .green {
@@ -251,9 +286,15 @@ input{
     border-color: green 1px solid;
   }
 
+  .itemPadding5 {
+    margin-bottom: 1px;
+    border-color: green 1px solid;
+    padding: 5px;
+  }
+
   @media screen and (max-width: 600px) {
     .contentfilter {
-      padding: 20px;
+      padding: 5px;
       border-bottom: rgb(158, 211, 191) 1px solid;
       width: 100%;
     }
@@ -452,6 +493,9 @@ input{
      display: none;
    }
 
+   .fieldsetFilter {
+     width: 320px;
+   }
 
 
 </style>

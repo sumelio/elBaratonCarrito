@@ -7,7 +7,7 @@
     .label
       .titleBox {{ product.name }}
       .price {{ product.price}}
-    .titleBox {{ product.available ? 'D' : 'No d' }}isponible
+    .labelBox Cant. {{product.quantity}} - {{ product.available ? 'D' : 'No d' }}isponible
   .image
     .showDetail
       a 🔍
@@ -155,6 +155,12 @@ export default {
      text-align: right;
     .titleBox {
       font-size: 16px;
+      padding: 10px 0 0 10px;
+      color: gray;
+      line-height: normal;
+    }
+    .labelBox {
+      font-size: 12px;
       padding: 10px 0 0 10px;
       color: gray;
       line-height: normal;

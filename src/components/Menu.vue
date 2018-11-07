@@ -4,12 +4,6 @@ aside.menu
   .menuList
     ul.menu-list(v-for="c in categories") 
       RpLevel(:id="c.id" :level="c")
-        //- .categories
-        //-  ul.menu(v-for="c in categories") 
-        //-    
-        //- transition(name="move")
-        //- rp-loader(v-show="isLoading")
-      
 </template>
 <script>
   import RpLevel from '@/components/Level.vue'
@@ -24,7 +18,7 @@ aside.menu
     },
 
     created () {
-      this.categories = categoryService.search(this.searchQuery, this.apiUrl)
+      this.categories = categoryService.search()
     }
   }
 </script>

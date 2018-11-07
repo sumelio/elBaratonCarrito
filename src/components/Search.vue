@@ -6,8 +6,8 @@
        .mainSection
         .menuCategory 
          rp-menu.menuBox()
-        .subLevelTitle {{  dataStore.level.name? dataStore.level.name : 'Todos los productos' }} {{dataStore.level.id? ', id:'+dataStore.level.id:''}} 
-          .currentProducts
+        .subLevelTitle {{  dataStore.level.name? dataStore.level.name : 'Selecciona una categoria' }} {{dataStore.level.id? ', id:'+dataStore.level.id:''}} 
+          .currentProducts(v-show="dataStore.level.name")
             .sectionFilter
               rp-filter.filter()           
             .productcontainer
@@ -44,7 +44,7 @@
 
     created () {
       this.isLoading = true
-      this.categories = categoryService.search(this.searchQuery, this.apiUrl)
+      this.categories = categoryService.search()
       this.isLoading = false
     },
 
@@ -105,8 +105,7 @@ div.subLevelTitle {
   }
 .menuBox {
   display: run-in;
-  top: 2;
-  right: 1;
+  top: 120px;
   position: fixed;
   background: white;
   z-index: 10008;

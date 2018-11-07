@@ -59,8 +59,6 @@
     max-height: 90px;
     background-color: white;
     flex-direction: column;
-    // display: flex;
-    // flex-flow: row wrap;
  }
  .product {
     border: 1px solid black;

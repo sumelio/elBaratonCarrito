@@ -2,7 +2,7 @@
 .content.boxCar
     .carShopping
     .tableCar
-      table.scroll
+      table.scroll.is-scrollable
         thead
         tbody
           tr(v-for="product in dataStore.shippingCar.products" v-show="product.count_buy > 0" )
@@ -19,9 +19,9 @@
                   i.removeProduct(@click="removeProduct(product)") ➖
             td
              span.priceTable {{product.count_buy * product.priceInt | numberToCurrency}}
-      .buy 
-        button.buttonBuy(@click="buy") Comprar
       .totalBuyCar Cant: {{ dataStore.shippingCar.quantity }} Total:{{ dataStore.shippingCar.totalPrice | numberToCurrency }}
+      .buy 
+        button.button.buttonBuy(@click="buy") Comprar
     .quantity {{ dataStore.shippingCar.totalPrice | numberToCurrency }}
 </template>
 
@@ -44,10 +44,14 @@
 </script>
 
 <style lang="scss" scoped >
+.buttonBuy {
+  height: 46px;
+  padding: 1
+}
 .boxCar {
   display: run-in;
-  top: 0;
-  right: 1;
+  top: 6px;
+  left: 6px;
   position: fixed;
   z-index: 10010;
   box-shadow: 0 0 30px rgba(0, 0, 0, 0.2);
@@ -148,9 +152,9 @@
             display: block;
             position: absolute;
             padding: 20px;
-            top: 210px;
+            top: 230px;
             width: 220px;
-            right: 80px;
+            right: 40px;
             color: black;
             font-size: 16px;
           }
@@ -159,9 +163,9 @@
             display: block;
             position: absolute;
             padding: 20px;
-            top: 250px;
+            top: 200px;
             width: 220px;
-            right: 80px;
+            right: 40px;
             color: black;
             font-size: 16px;
           }

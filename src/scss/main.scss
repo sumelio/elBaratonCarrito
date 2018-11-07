@@ -1,4 +1,7 @@
+
 @import '../../node_modules/bulma/bulma.sass';
+@import '../../node_modules/bulma-extensions/bulma-slider/dist/css/bulma-slider.sass';
+@import '../../node_modules/bulma-extensions/bulma-checkradio/dist/css/bulma-checkradio.sass';
 
 .move-enter-active, .move-leave-active {
   transform: translateX(0);
