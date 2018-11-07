@@ -66,8 +66,6 @@
         productsFilter: [],
         isLoading: false,
         isShowNotification: false,
-        selectedProduct: '',
-        categoryIndex: 0,
         isavailable: true,
         quantity: 10000,
         minPrice: 1000,
@@ -138,6 +136,7 @@
       search () {
         this.isLoading = true
         let productsFilter = this.dataStore.products.filter(item =>
+          item.sublevel_id === this.dataStore.level.id &&
           item.available === this.isavailable &&
           item.quantity <= this.quantity &&
           item.priceInt >= this.minPrice &&

@@ -9,16 +9,18 @@
             td
              .tooltip
               img.imgCar(:src="product.image | absolutePath")
-              span.tooltiptext {{product.name}}, Precio: {{product.price}}
+              span.tooltiptext {{product.name}}, Precio: {{product.price}}, sublevel_id: {{product.sublevel_id}} 
             td
               .counter
                 .add
-                  i.addProduct(@click="addProduct(product)" ) ➕
+                  i.addProduct(@click="addProduct(product)" ) &#x2795;
                 .counterProduct {{product.count_buy}}
                 .remove
                   i.removeProduct(@click="removeProduct(product)") ➖
             td
              span.priceTable {{product.count_buy * product.priceInt | numberToCurrency}}
+      .buy 
+        button.buttonBuy(@click="buy") Comprar
       .totalBuyCar Cant: {{ dataStore.shippingCar.quantity }} Total:{{ dataStore.shippingCar.totalPrice | numberToCurrency }}
     .quantity {{ dataStore.shippingCar.totalPrice | numberToCurrency }}
 </template>
@@ -84,6 +86,10 @@
    display: none;
  }
 
+  .buy {
+   display: none;
+ }
+
  @media only screen and (max-width: 600px){
    .totalBuy {
      display: none;
@@ -137,6 +143,18 @@
           .carShopping{
             display: none;
           }
+
+          .buy{
+            display: block;
+            position: absolute;
+            padding: 20px;
+            top: 210px;
+            width: 220px;
+            right: 80px;
+            color: black;
+            font-size: 16px;
+          }
+
           .totalBuyCar{
             display: block;
             position: absolute;

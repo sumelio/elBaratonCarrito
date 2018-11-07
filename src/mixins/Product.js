@@ -8,6 +8,9 @@ const productMixin = {
     setProduct ({products}) { this.$store.commit('setProduct', {products}) },
     setLevel ({level}) {
       this.$store.commit('setLevel', {level})
+    },
+    buy () {
+      this.$store.commit('buy')
     }
   },
 

@@ -23,12 +23,18 @@ const store = new Vuex.Store({
 
   mutations: {
     addProduct (state, {product}) {
-      product.count_buy += 1
-
       var productInCar = state.dataStore.shippingCar.products.filter(element => (element.id === product.id))
 
       if (productInCar.length === 0) {
         state.dataStore.shippingCar.products.push(product)
+        product.count_buy += 1
+      } else {
+        state.dataStore.shippingCar.products.forEach(element => {
+          if (element.id === product.id) {
+            element.count_buy += 1
+          }
+        }
+        )
       }
 
       state.dataStore.shippingCar.totalPrice += product.priceInt
@@ -36,9 +42,16 @@ const store = new Vuex.Store({
     },
 
     removeProduct (state, {product}) {
-      product.count_buy -= 1
-      state.dataStore.shippingCar.totalPrice -= product.priceInt
-      state.dataStore.shippingCar.quantity -= 1
+      if ((product.count_buy) > 0) {
+        product.count_buy -= 1
+
+        state.dataStore.shippingCar.totalPrice -= product.priceInt
+        state.dataStore.shippingCar.quantity -= 1
+        if (product.count_buy === 0) {
+          let index = state.dataStore.shippingCar.products.indexOf(product)
+          state.dataStore.shippingCar.products.splice(index, 1)
+        }
+      }
     },
 
     setProduct (state, {products}) {
@@ -63,6 +76,13 @@ const store = new Vuex.Store({
       filter.forEach(element => {
         state.dataStore.productsFind.push(element)
       })
+    },
+
+    buy (state) {
+      state.dataStore.shippingCar.products = []
+      state.dataStore.shippingCar.quantity = 0
+      state.dataStore.shippingCar.totalPrice = 0
+      state.dataStore.productsFind = []
     }
   }
 })

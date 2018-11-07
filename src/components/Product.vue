@@ -1,8 +1,7 @@
 <template lang="pug">
 .box
   i.addProduct.fa.fa-plus(@click="addProduct(product)")
-  i.removeProduct.fa.fa-menus(:class="{'hide': product.count_buy < 1 }", @click="removeProduct(product)")
-  .countBuyProduct.fa(:class="{'hide': product.count_buy < 1 }" ) {{ product.count_buy  }}
+  .countBuyProduct.fa(:class="{'hide': countBuy < 1 }" ) {{ countBuy }}
   img.item_data.img(:src="product.image | absolutePath")
   .headerBox
     .label
@@ -16,10 +15,10 @@
       .detail
       .info
         ul
-          li {{ product.id }}
+          li sublevel_id: {{ product.sublevel_id }}
           li {{ product.price}}
           li {{ product.available ? 'D' : 'No d' }}isponible
-          li Cantidad {{ product.quantity }} 
+          li Cantidad: {{ product.quantity }} 
   .showAllInfo
 </template>
 
@@ -48,7 +47,15 @@ export default {
   },
 
   computed: {
-    ...mapState(['shippingCar'])
+    ...mapState(['dataStore']),
+    countBuy: function () {
+      let currentProduct = this.dataStore.shippingCar.products.filter(e => e.id === this.product.id)
+      let countBuy = 0
+      if (currentProduct && currentProduct.length > 0) {
+        countBuy = currentProduct[0].count_buy
+      }
+      return countBuy
+    }
   },
 
   methods: {
@@ -59,12 +66,16 @@ export default {
 
     hideAllInfo () {
       this.isShowAllInfo = false
+    },
+
+    getCountBuy () {
+      let currentProduct = this.dataStore.shippingCar.products.filter(element => (element.id === this.product.id))
+      this.countBuy = currentProduct.count_buy
     }
   },
 
   filters: {
     absolutePath (str) {
-      // return str + ' things'
       return 'https://static.iris.net.co/semana/upload/images/2016/10/29/502564_1.jpg'
     }
   }
