@@ -5,13 +5,15 @@ module.exports = {
   entry: './src/main.js',
   output: {
     path: path.resolve(__dirname, './dist'),
-    publicPath: '/dist/',
+    // publicPath: '/dist/',
+    publicPath: path.resolve(__dirname, 'dist') + '/',
     filename: 'build.js'
   },
   module: {
     rules: [
       {
         test: /\.(js|vue)$/,
+        exclude: /node_modules/,
         loader: 'eslint-loader',
         enforce: 'pre',
         include: [path.resolve(__dirname, './src')]
@@ -53,7 +55,8 @@ module.exports = {
   devServer: {
     historyApiFallback: true,
     noInfo: false,
-    overlay: true
+    overlay: true,
+    port: 9104
   },
   performance: {
     hints: false
@@ -68,12 +71,6 @@ if (process.env.NODE_ENV === 'production') {
     new webpack.DefinePlugin({
       'process.env': {
         NODE_ENV: '"production"'
-      }
-    }),
-    new webpack.optimize.UglifyJsPlugin({
-      sourceMap: true,
-      compress: {
-        warnings: false
       }
     }),
     new webpack.LoaderOptionsPlugin({
