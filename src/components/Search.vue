@@ -78,6 +78,10 @@
     font-size: 20px; 
     box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
     border-radius: 10px;
+    @media only screen and (max-width: 600px){
+       box-shadow: 0 0 0 rgba(0, 0, 0, 0);
+       border-radius: 0px;
+    }      
   }
  
   .menuCategory {
@@ -98,6 +102,7 @@
     display: flex;
     flex-wrap: wrap;
     justify-content: space-evenly;
+    
   }
   .productClass {
     border-radius: 25px;
