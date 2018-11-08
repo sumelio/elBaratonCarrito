@@ -13,19 +13,23 @@
             td
               .counter
                 .add
-                  i.addProduct(@click="addProduct(product)" ) &#x2795;
+                  i.addProduct(@click="addProduct(product)" ) 
+                   .plus +
                 .counterProduct {{product.count_buy}}
                 .remove
-                  i.removeProduct(@click="removeProduct(product)") ➖
+                  i.removeProduct(@click="removeProduct(product)") 
+                   .minus - 
             td
              span.priceTable {{product.count_buy * product.priceInt | numberToCurrency}}
       .totalBuyCar Cant: {{ dataStore.shippingCar.quantity }} Total:{{ dataStore.shippingCar.totalPrice | numberToCurrency }}
       .buy 
         button.button.buttonBuy(@click="buy") Comprar
     .quantity {{ dataStore.shippingCar.totalPrice | numberToCurrency }}
+    .quantitySmall {{ dataStore.shippingCar.quantity }}
 </template>
 
 <script>
+  import image from '../assets/product.jpg'
   import productMixin from '@/mixins/Product'
   import { mapState } from 'vuex'
   export default {
@@ -37,13 +41,14 @@
 
     filters: {
       absolutePath (str) {
-        return 'https://static.iris.net.co/semana/upload/images/2016/10/29/502564_1.jpg'
+        return image
       }
     }
   }
 </script>
 
 <style lang="scss" scoped >
+
 .buttonBuy {
   height: 46px;
   padding: 1
@@ -84,7 +89,24 @@
    font-weight: bold;
    font-size: 13px;
    background: rgba(255, 255, 255, 0.55);
+   @media only screen and (max-width: 600px){
+     display: none;
+   }
  }
+
+ .quantitySmall {
+   display: none;
+   @media only screen and (max-width: 600px){
+        position: absolute;
+   width: 10px;
+   top: 130%;
+   left: 20px;
+   font-weight: bold;
+   font-size: 13px; 
+     display: block;
+   }
+ }
+
 
  .totalBuyCar {
    display: none;
@@ -135,8 +157,6 @@
   } // tableCar
 
   &:hover {
-
-          display: inline;
           z-index: 10010;
           background: rgba(255, 255, 255, 0.85);
           box-shadow: 0 0 30px rgba(0, 0, 0, 0.2);
@@ -202,7 +222,7 @@
                td {
                  min-width: 50px;
                  width: 10%;
-                 border-right: 1px solid black;
+                 border-right: 1px solid rgba(255, 255, 255, 0.85);
                  word-wrap: break-word;
                  font-size: 16px;
                  .tooltip {
@@ -232,11 +252,12 @@
                        left: 50%;
                        border-width: 5px;
                        border-style: solid;
-         @media only screen and (max-width: 600px){
-   .totalBuy {
-     display: none;
-   }
- }               border-color: #555 transparent transparent transparent;
+                       @media only screen and (max-width: 600px){
+                        .totalBuy {
+                          display: none;
+                        }
+                      }               
+                    border-color: #555 transparent transparent transparent;
                        //border: 1px red solid;
                      }
                    }
@@ -246,7 +267,7 @@
                    }
                  }
                }
-              }
+              } // End tbody {
              } // table.scroll
           } // tableCar
 
@@ -255,7 +276,7 @@
 
 @media only screen and (max-width: 600px){
   .boxCar {
-    top: 2px;
+    top: 20px;
     padding: 3px;
     width: 30px;
     height: 30px;
@@ -270,38 +291,51 @@ img.imgCar{
 
 i.addProduct {
   z-index: 10002;
-  width: 40px;
   height: 40px;
-  color: rgb(119, 221, 119);;
-  border-radius: 20px;
+  width: 50px;
+  margin: red;
+  color: rgb(119, 221, 119);
   text-align: center;
   line-height: 40px;
-  font-size: 1.0rem;
   cursor: pointer;
   transition: all 0.3s;
+  box-shadow: 0 0 4px 2px rgba(80, 80, 80, 0.1);
   &:hover {
     transform: scale(1.15);
   }
+}
+
+.plus {
+  color: rgb(119, 221, 119);
+  height: 40px;
+  width: 20px;
+  text-align: center;
+  line-height: 40px;
+  box-shadow: 0 0 4px 2px rgba(80, 80, 80, 0.1);
+  font-size: 20px; 
+
 }
 
 i.removeProduct {
   z-index: 10002;
-  width: 50px;
-  height: 50px;
   color: #f24e4e;
-  border-radius: 25px;
-  text-align: center;
-  line-height: 38px;
-  font-size: 1.0rem;
-  box-shadow: 0 0 4px 2px rgba(80, 80, 80, 0.1);
+  border-radius: 20px;
+  
   cursor: pointer;
   transition: all 0.3s;
   &:hover {
     transform: scale(1.15);
   }
 }
-
-
+.minus {
+  color: #f24e4e;
+  height: 40px;
+  width: 20px;
+  text-align: center;
+  line-height: 40px;
+  box-shadow: 0 0 4px 2px rgba(80, 80, 80, 0.1);
+  font-size: 20px; 
+}
 i.deleteProduct {
   z-index: 10002;
   width: 50px;

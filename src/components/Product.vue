@@ -2,7 +2,7 @@
 .box
   i.addProduct.fa.fa-plus(@click="addProduct(product)")
   .countBuyProduct.fa(:class="{'hide': countBuy < 1 }" ) {{ countBuy }}
-  img.item_data.img(:src="product.image | absolutePath")
+  img.item_data.img(:src="imagesFakeProduct")
   .headerBox
     .label
       .titleBox {{ product.name }}
@@ -15,16 +15,16 @@
       .detail
       .info
         ul
+          li Nombre: {{ product.name }}
           li sublevel_id: {{ product.sublevel_id }}
-          li {{ product.price}}
+          li precio: {{ product.price}}
           li {{ product.available ? 'D' : 'No d' }}isponible
           li Cantidad: {{ product.quantity }} 
   .showAllInfo
 </template>
 
 <script>
-// import RpCar from '@/components/Car.vue'
-import RpProductDetail from '@/components/ProductDetail.vue'
+import image from '../assets/product.jpg'
 import productMixin from '@/mixins/Product'
 import { mapState } from 'vuex'
 
@@ -33,8 +33,6 @@ export default {
 
   name: 'product',
 
-  components: { 'rp-prod-detail': RpProductDetail },
-
   props: {
     product: { type: Object, requiered: true },
     car: { type: Object, requiered: true }
@@ -42,7 +40,8 @@ export default {
 
   data () {
     return {
-      isShowAllInfo: false
+      isShowAllInfo: false,
+      imagesFakeProduct: image
     }
   },
 
@@ -72,14 +71,7 @@ export default {
       let currentProduct = this.dataStore.shippingCar.products.filter(element => (element.id === this.product.id))
       this.countBuy = currentProduct.count_buy
     }
-  },
-
-  filters: {
-    absolutePath (str) {
-      return 'https://static.iris.net.co/semana/upload/images/2016/10/29/502564_1.jpg'
-    }
   }
-
 }
 </script>
 
@@ -90,7 +82,7 @@ export default {
   height: 290px;
   // border: red solid 1px;
   i.addProduct {
-    z-index: 10005;
+    z-index: 3;
     width: 40px;
     height: 40px;
     background: rgb(119, 221, 119);
@@ -175,11 +167,10 @@ export default {
     }
   }
   img {
-    position: absolute;
-    max-height: 350px;
-    width: auto;
-    top: 100px;
-    right: 10px;
+    min-width: 250px;
+    max-width: 250px;
+    min-height: 250px;
+    max-height: 250px;
     padding: 10px;
     transition: all 1.5s ease-in-out;
   }
@@ -194,14 +185,15 @@ export default {
     //border: 2px red solid;
     .showDetail {
       position: absolute;
-      top: 93px;
+      top: -198px;
       right: -124px;
       text-align: left;
+      z-index: 1;
     }
     .detail {
       position: absolute;
       left: 223px;
-      top: 87px;
+      top: -200px;
       height: 32px;
       width: 32px;
       box-shadow: 0 0 25px rgba(0, 0, 0, 0.2);
@@ -213,6 +205,7 @@ export default {
       font-size: 20px;
       color: black;
       border: 2px blue static;
+      z-index: 1;
     }
     .info {
       position: absolute;
@@ -225,13 +218,14 @@ export default {
         color: rgb(255, 255, 255);
         transition: all 1.5s ease-in-out;
       }
+      z-index: 2;
     }
     &:hover {
       .detail {
         // top: -220px;
         // left: -165px;
         left: -10px;
-        top: -22px;
+        top: -290px;
         height: 370px;
         width: 290px;
         color: red;
@@ -240,7 +234,7 @@ export default {
       }
 
       .info {
-        top: 60px;
+        top: -210px;
         left: 50px;
         height: 240px;
         width: 230px;
@@ -273,7 +267,13 @@ export default {
 }
 
 .fa-plus:before {
-  content: '➕';
+  font-size: 110%;
+  font-weight: bold;
+  color: #fff;
+  text-align: center;
+  line-height: 1.5em;
+  transition: all .2s ease-out;
+  content: '+';
 }
 
 .fa-menus:before {

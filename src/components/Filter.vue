@@ -39,11 +39,11 @@
           .item
            fieldset.fieldsetFilter 
             legend Precio 
-            .item Entre $
+            .item Entre 
               input(type="number", v-model="minPrice", :min="100", :max="100000")
               span.space-between
               span y
-              span.space-between $
+              span.space-between
               input(type="number", v-model="maxPrice", :min="100", :max="100000")
               span.space-between
         .contentfilter
@@ -488,8 +488,8 @@ input{
       }  
    }
 
-    input[number] {
-     width: 80px;
+    input[type="number"] {
+     max-width: 100px;
     }
 
 

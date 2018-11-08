@@ -2,7 +2,7 @@
   #app
     rappi-header
 
-    router-view(:apiUrl="apiUrl")
+    router-view()
 
     rappi-footer
 </template>
@@ -15,19 +15,7 @@ import RappiHeader from '@/components/layout/Header.vue'
 export default {
   name: 'app',
 
-  components: { RappiFooter, RappiHeader },
-
-  data () {
-    return {
-      apiUrl: 'https://www.rappi.com/api-services/windu/sub_corridors/store/6660307/corridor/125841'
-    }
-  },
-
-  created () {
-    this.$bus.$on('set-url-api', (url) => {
-      this.apiUrl = url
-    })
-  }
+  components: { RappiFooter, RappiHeader }
 }
 </script>
 

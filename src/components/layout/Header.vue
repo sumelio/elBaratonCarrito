@@ -42,7 +42,8 @@ export default {
 }
 
 .button-nav {
-    background: #FF7175;
+    display: none;
+    background: rgb(242, 246, 246);
     color: #9faab7;
     -webkit-border-radius: 4px;
     -moz-border-radius: 4px;
@@ -53,6 +54,11 @@ export default {
     border: 0;
     padding: 40px 0px 20px 0px;
     margin: 20px 0px 10px 0px;
+
+    @media screen and (max-width: 600px) {
+     
+    display: block;
+    }
 }
 
 
@@ -64,7 +70,7 @@ export default {
     width: 100%;
     top: 0px;
     left: 0px;
-    z-index: 1000;
+    z-index: 1006;
 }
 
 /* Style the links inside the navigation bar */
@@ -138,8 +144,8 @@ router-link:hover {
   .topnav.responsive a {
     float: right;
     display: block;
-    color: #f2f2f2;
-    background-color: #FF7175;
+    color: black;
+    background-color:rgb(242, 246, 246);
     text-align: center;
     padding: 0px 0px;
     text-decoration: none;

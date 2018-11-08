@@ -28,6 +28,7 @@ aside.menu
    width: 190px;
    height: 360px;
    overflow: scroll;
+   background: rgba(242, 236, 236, 0.55);
 }
 
 .li {

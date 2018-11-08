@@ -23,13 +23,12 @@
   import RpMenu from '@/components/Menu.vue'
   import RpNotification from '@/components/shared/Notification.vue'
   import RpCar from '@/components/Car.vue'
-  import RpProductDetail from '@/components/ProductDetail.vue'
   import { mapState } from 'vuex'
 
   export default {
     name: 'app',
 
-    components: { 'rp-prod-detail': RpProductDetail, RpMenu, RpCar, RpProduct, RpFilter, RpNotification },
+    components: { RpMenu, RpCar, RpProduct, RpFilter, RpNotification },
 
     data () {
       return {
@@ -66,31 +65,33 @@
 </script>
 
 <style lang="scss">
-.mainSection {
-  display: inline-flex;
-  flex-flow: row;
-  //flex-direction: column;
-}
-div.subLevelTitle { 
-   width: 100%;
-   text-align: center;
-   font-weight: bold;
-   font-size: 20px; 
-   box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
-   border-radius: 10px;
- }
+  .mainSection {
+    display: inline-flex;
+    flex-flow: row;
+    //flex-direction: column;
+  }
+
+  div.subLevelTitle { 
+    width: 100%;
+    text-align: center;
+    font-weight: bold;
+    font-size: 20px; 
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+    border-radius: 10px;
+  }
  
-.menuCategory {
-  min-width: 200px;
-  max-width: 200px;
-  @media only screen and (max-width: 600px){
-    display: none;
- }  
-}
-.currentProducts {
- width: 100%;
-}
-.productcontainer {
+  .menuCategory {
+    min-width: 200px;
+    max-width: 200px;
+    @media only screen and (max-width: 600px){
+      display: none;
+    }  
+  }
+  .currentProducts {
+  width: 100%;
+  }
+  
+  .productcontainer {
     position: relative;
     padding: 0px 0 0px 0;
     width: 100%;
@@ -107,15 +108,15 @@ div.subLevelTitle {
     box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
     border-radius: 16px;
   }
-.menuBox {
-  display: run-in;
-  top: 120px;
-  position: fixed;
-  background: white;
-  z-index: 10008;
-}
+  .menuBox {
+    display: run-in;
+    top: 120px;
+    position: fixed;
+    background: white;
+    z-index: 10008;
+  }
 
-.filter {
-  font-size: 14px;
-}
+  .filter {
+    font-size: 14px;
+  }
 </style>

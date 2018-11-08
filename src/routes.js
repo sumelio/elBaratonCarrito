@@ -1,9 +1,7 @@
 import Search from '@/components/Search.vue'
-import About from '@/components/About.vue'
 
 const routes = [
-  { path: '/', component: Search, name: 'search' },
-  { path: '/about', component: About, name: 'about' }
+  { path: '/', component: Search, name: 'search' }
 ]
 
 export default routes
