@@ -131,19 +131,20 @@
 }
  .tableCar {
    padding: 10px;
-
+   transition: opacity 5s;
    table.scroll {
      display: none;
-     width: 100%;
-     right: 100px;
+     width: 10%;
+     right: 10px;
      /* 140px * 5 column + 16px scrollbar width */
      border-spacing: 0;
      padding: 100px;
      font-size: 8px;
+     transition: opacity 5s;
      //border: 2px solid black;
      tbody, thead tr {
        //display: block;
-         background: rgba(255, 255, 255, 0.85);
+         //background: rgba(255, 255, 255, 0.85);
      }
      tbody {
        height: 150px;
@@ -161,7 +162,7 @@
 
   &:hover {
           z-index: 10010;
-          background: rgba(255, 255, 255, 0.85);
+          background: rgba(255, 255, 255, 0.98);
           box-shadow: 0 0 30px rgba(0, 0, 0, 0.2);
           border-radius: 15px;
           padding: 20px 15px 0px 0px;
@@ -170,7 +171,6 @@
           .carShopping{
             display: none;
           }
-
           .buy{
             display: block;
             position: absolute;
@@ -211,7 +211,7 @@
              //border: 2px solid black;
              tbody, thead tr {
                display: block;
-                 background: rgba(255, 255, 255, 0.85);
+                 //background: rgba(255, 255, 255, 0.85);
                  td {
                    min-width: 50px;
                    width: 10%;
