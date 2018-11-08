@@ -101,12 +101,12 @@
    display: none;
    @media only screen and (max-width: 600px){
         position: absolute;
-   width: 10px;
-   top: 130%;
-   left: 20px;
-   font-weight: bold;
-   font-size: 13px; 
-     display: block;
+        width: 10px;
+        top: 130%;
+        left: 20px;
+        font-weight: bold;
+        font-size: 13px; 
+        display: block;
    }
  }
 
@@ -193,7 +193,7 @@
             font-size: 16px;
           }
 
-          .totalBuy, .quantity{
+          .totalBuy, .quantity, .quantitySmall{
             display: none;
           }
 
