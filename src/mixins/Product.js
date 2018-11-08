@@ -2,6 +2,7 @@ const productMixin = {
   methods: {
     addProduct (product) { this.$store.commit('addProduct', {product}) },
     removeProduct (product) { this.$store.commit('removeProduct', {product}) },
+    removeProductAll (product) { this.$store.commit('removeProductAll', {product}) },
     showAllInfo () { this.isShowAllInfo = true },
     hideAllInfo () { this.isShowAllInfo = false },
     setProductFind ({productFilter}) { this.$store.commit('setProductFind', {productFilter}) },

@@ -19,6 +19,9 @@
                 .remove
                   i.removeProduct(@click="removeProduct(product)") 
                    .minus - 
+                .remove
+                  i.removeProduct(@click="removeProductAll(product)") 
+                   .minusAll -    
             td
              span.priceTable {{product.count_buy * product.priceInt | numberToCurrency}}
       .totalBuyCar Cant: {{ dataStore.shippingCar.quantity }} Total:{{ dataStore.shippingCar.totalPrice | numberToCurrency }}
@@ -336,6 +339,18 @@ i.removeProduct {
   box-shadow: 0 0 4px 2px rgba(80, 80, 80, 0.1);
   font-size: 20px; 
 }
+
+.minusAll {
+  color: white;
+  background: #f24e4e;
+  height: 40px;
+  width: 20px;
+  text-align: center;
+  line-height: 40px;
+  box-shadow: 0 0 4px 2px rgba(80, 80, 80, 0.1);
+  font-size: 20px; 
+}
+
 i.deleteProduct {
   z-index: 10002;
   width: 50px;

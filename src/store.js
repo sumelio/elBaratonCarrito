@@ -54,6 +54,16 @@ const store = new Vuex.Store({
       }
     },
 
+    removeProductAll (state, {product}) {
+      if ((product.count_buy) > 0) {
+        product.count_buy = 0
+
+        state.dataStore.shippingCar.totalPrice = 0
+        state.dataStore.shippingCar.quantity = 0
+        let index = state.dataStore.shippingCar.products.indexOf(product)
+        state.dataStore.shippingCar.products.splice(index, 1)
+      }
+    },
     setProduct (state, {products}) {
       state.dataStore.products = []
       products.forEach(element => {
