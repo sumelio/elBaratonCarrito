@@ -29569,7 +29569,7 @@ Vue.compile = compileToFunctions;
 /* 10 */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__.p + "product_f917536f3408749bb5e256b5a2e04f11.jpg";
+module.exports = __webpack_require__.p + "product.jpg";
 
 /***/ }),
 /* 11 */
@@ -33379,13 +33379,13 @@ exports.push([module.i, "", ""]);
 /* 43 */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__.p + "Selection_366_1599473505b89c61a727f82fdfc4ead2.png";
+module.exports = __webpack_require__.p + "Selection_366.png";
 
 /***/ }),
 /* 44 */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__.p + "car_small_57f6918aeeedbe5f62891061a9b6b122.png";
+module.exports = __webpack_require__.p + "car_small.png";
 
 /***/ }),
 /* 45 */
