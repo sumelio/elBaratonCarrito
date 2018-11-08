@@ -127,7 +127,7 @@
 
 .priceTable {
   text-align: right;
-  font-size: 12px;
+  font-size: 10px;
 }
  .tableCar {
    padding: 10px;
