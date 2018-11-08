@@ -28,10 +28,12 @@
         .contentfilter
           fieldset.fieldsetFilter
               legend Cantidad
+              span.space-between
               .item 
                 span.space-between
                 label.radio(for="rangeQuantity") Menos de {{quantity}} 
                 span.space-between
+              .item 
                 input.slider.is-large(type="range", id="rangeQuantity", v-model="quantity", :min="0", :max="1000")
                 span.space-between
       .filters

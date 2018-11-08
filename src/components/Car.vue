@@ -24,7 +24,7 @@
                    .minusAll -    
             td
              span.priceTable {{product.count_buy * product.priceInt | numberToCurrency}}
-      .totalBuyCar Cant: {{ dataStore.shippingCar.quantity }} Total:{{ dataStore.shippingCar.totalPrice | numberToCurrency }}
+      .totalBuyCar Cant:{{ dataStore.shippingCar.quantity }} Total:{{ dataStore.shippingCar.totalPrice | numberToCurrency }}
       .buy 
         button.button.buttonBuy(@click="buy") Comprar
     .quantity {{ dataStore.shippingCar.totalPrice | numberToCurrency }}
@@ -190,7 +190,7 @@
             width: 220px;
             right: 40px;
             color: black;
-            font-size: 16px;
+            font-size: 11px;
           }
 
           .totalBuy, .quantity, .quantitySmall{

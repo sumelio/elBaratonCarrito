@@ -132,7 +132,7 @@ export default {
   }
   .countBuyProduct{
     position: absolute;
-    z-index: 10005;
+    z-index: 1005;
     width: 50px;
     height: 50px;
     color: #f24e4e;

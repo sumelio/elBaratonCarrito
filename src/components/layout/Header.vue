@@ -43,7 +43,7 @@ export default {
 
 .button-nav {
     display: none;
-    background: rgb(242, 246, 246);
+    background: rgba(242, 246, 246, 0.5);
     color: #9faab7;
     -webkit-border-radius: 4px;
     -moz-border-radius: 4px;
@@ -56,21 +56,34 @@ export default {
     margin: 20px 0px 10px 0px;
 
     @media screen and (max-width: 600px) {
-     
-    display: block;
+      display: block;
+     // position: fixed;
+      width: 100%;
+      top: 0px;
+      left: 0px;
+      z-index: 1006;
     }
 }
 
 
 /* Add a black background color to the top navigation */
 .topnav {
-    background-color: rgb(158, 211, 191);
+    background-color: rgba(158, 211, 191,0.95);
     overflow: hidden;
     position: fixed;
     width: 100%;
     top: 0px;
     left: 0px;
-    z-index: 1006;
+    z-index: 100006;
+
+    @media screen and (max-width: 600px) {
+      display: block;
+     // position: fixed;
+      width: 100%;
+      top: 0px;
+      left: 0px;
+      z-index: 1006;
+    }
 }
 
 /* Style the links inside the navigation bar */
@@ -135,7 +148,7 @@ router-link:hover {
 
 /* The "responsive" class is added to the topnav with JavaScript when the user clicks on the icon. This class makes the topnav look good on small screens (display the links vertically instead of horizontally) */
 @media screen and (max-width: 600px) {
-  .topnav.responsive {position: relative;}
+  .topnav.responsive {position: fixed;}
   .topnav.responsive .icon {
     position: absolute;
     right: 0;
